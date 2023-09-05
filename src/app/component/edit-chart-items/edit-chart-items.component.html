@@ -1,0 +1,28 @@
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+          <form #myForm="ngForm" (ngSubmit)="onUpdate()">
+            <div class="row">
+              <div class="col-sm-1 form-group">
+                <label for="name">Color</label>
+                <input type="color" id="Color" class="form-control" name="color"  [(ngModel)]="formData.color" >
+              </div>
+              <div class="col-sm-5 form-group">
+                <label for="name">Category</label>
+                <input type="text" id="category" class="form-control" name="category" [(ngModel)]="formData.category" >
+              </div>
+              <div class="col-sm-2 form-group">
+                <label for="amount">Monthly Cost</label>
+                <input type="number" id="monthlyCost" class="form-control" name="cost" [(ngModel)]="formData.monthlyCost" >
+              </div>
+              <div class="col-sm-2 form-group">
+                <label for="amount" style="color: white;">update</label>
+                <button class="form-control btn btn-warning" type="submit"  >Update</button>
+                
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+</div>

@@ -1,0 +1,43 @@
+<div *ngIf="!isCategoryValid" class="alert alert-danger alert-dismissible fade show" role="alert">
+    Category must be at least 2 charcters long.
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+   </button>
+</div>
+<div *ngIf="!isCostValid"  class="alert alert-danger alert-dismissible fade show" role="alert">
+   Cost must be at least 1 or greater.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+          <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-sm-1 form-group">
+                <label for="name">Color</label>
+                <input type="color" id="Color" class="form-control" name="color"  [(ngModel)]="formData.color" >
+              </div>
+              <div class="col-sm-5 form-group">
+                <label for="name">Category</label>
+                <input type="text" id="category" class="form-control" name="category" [(ngModel)]="formData.category" >
+              </div>
+              <div class="col-sm-2 form-group">
+                <label for="amount">Monthly Cost</label>
+                <input type="number" id="monthlyCost" class="form-control" name="cost" [(ngModel)]="formData.monthlyCost" >
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <button class="btn btn-success" type="submit"  >Add</button>
+                <button class="btn btn-primary" type="button" (click)="clearForm()" >Clear</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+</div>

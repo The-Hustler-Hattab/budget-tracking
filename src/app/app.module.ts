@@ -3,16 +3,28 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './component/header/header.component';
+import { PieChartComponent } from './component/pie-chart/pie-chart.component';
+import { CategoryModifierService } from './service/categoryModifier.service';
+import { AddChartItemComponent } from './component/pie-chart/add-chart-item/add-chart-item.component';
+import { FormsModule } from '@angular/forms';
+import { FormValidatorService } from './service/customFormValidatior.service';
+import { EditChartItemsComponent } from './component/edit-chart-items/edit-chart-items.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    PieChartComponent,
+    AddChartItemComponent,
+    EditChartItemsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [CategoryModifierService, FormValidatorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
