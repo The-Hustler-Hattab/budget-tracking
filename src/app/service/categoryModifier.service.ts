@@ -5,7 +5,7 @@ import { Chart } from "chart.js";
 @Injectable()
 export class CategoryModifierService{
 
-    public itemsList: ChartItem[] = [new ChartItem("car","red",300), new ChartItem("electricity","blue",100)];
+    public itemsList: ChartItem[] = [new ChartItem("car","#ec2222",300), new ChartItem("electricity","#1100ff",100)];
     public chart: any;
 
     public totalMonthlyCost: Number= 0;
