@@ -8,7 +8,6 @@ import { PieChartComponent } from './component/pie-chart/pie-chart.component';
 import { CategoryModifierService } from './service/categoryModifier.service';
 import { AddChartItemComponent } from './component/pie-chart/add-chart-item/add-chart-item.component';
 import { FormsModule } from '@angular/forms';
-import { FormValidatorService } from './service/customFormValidatior.service';
 import { EditChartItemsComponent } from './component/edit-chart-items/edit-chart-items.component';
 
 @NgModule({
@@ -24,7 +23,8 @@ import { EditChartItemsComponent } from './component/edit-chart-items/edit-chart
     AppRoutingModule,
     FormsModule
   ],
-  providers: [CategoryModifierService, FormValidatorService],
+  providers: [CategoryModifierService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

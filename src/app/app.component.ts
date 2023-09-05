@@ -8,11 +8,10 @@ import { CategoryModifierService } from './service/categoryModifier.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'budget-tracking';
 
-  // constructor(private categoryModifier :CategoryModifierService){}
+  constructor(private categoryModifier :CategoryModifierService){}
   
-  // public itemsList: ChartItem[]=[];
+  public itemsList: ChartItem[]=[];
   // public chartList: ChartItem[] = [new ChartItem("car","red",300), new ChartItem("electricity","blue",100)];
 
 
@@ -20,7 +19,7 @@ export class AppComponent implements OnInit{
 
   
   ngOnInit(): void {
-    // this.itemsList= this.categoryModifier.itemsList;
+    this.itemsList= this.categoryModifier.itemsList;
     // this.categories= this.categoryModifier.categories;
   }
 

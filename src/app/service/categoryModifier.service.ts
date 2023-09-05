@@ -8,24 +8,32 @@ export class CategoryModifierService{
     public chart: any;
 
 
+    public deleteItem(chartItemIndex: number){
+        this.itemsList.splice(chartItemIndex,1)
+        this.updateChart()
+    }
+
     public changeCatgory(chartItemIndex: number, newCategoty: string){
         this.itemsList[chartItemIndex].category=newCategoty;
+        this.updateChart()
     }
 
     public changeColor(chartItemIndex: number, color: string){
         this.itemsList[chartItemIndex].color=color;
+        this.updateChart()
 
     }
 
     public changeCost(chartItemIndex: number, cost: number){
         this.itemsList[chartItemIndex].monthlyCost=cost;
+        this.updateChart()
 
     }
 
     public addNewCategory(chartItem: ChartItem){
         
         const newItem= new ChartItem(chartItem.category,chartItem.color,chartItem.monthlyCost)
-        
+
         this.itemsList.push(newItem);
 
         console.log("items  "+this.itemsList);
