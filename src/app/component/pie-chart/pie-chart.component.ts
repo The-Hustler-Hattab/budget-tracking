@@ -1,8 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {  Component } from '@angular/core';
 import Chart from 'chart.js/auto';
 import {ChartItem} from '../../model/ChartItem.model';
 import { CategoryModifierService } from 'src/app/service/categoryModifier.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-pie-chart',
@@ -12,17 +11,26 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 
 export class PieChartComponent{
+  public totalMonthlyCost: Number= 0;
 
   public chart: any;
   public itemsList: ChartItem[] =[];
   
-  constructor(private categoryModifier:CategoryModifierService){}
+  constructor(private categoryModifier:CategoryModifierService, 
+
+    ){}
 
   ngOnInit(): void {
     console.log("+"+this.itemsList);
     this.itemsList= this.categoryModifier.itemsList
     this.chart = this.categoryModifier.chart;
     this.categoryModifier.createChart()
+
+    this.totalMonthlyCost= this.categoryModifier.totalMonthlyCost;
+
+    this.categoryModifier.totalCostEvent.subscribe((totalCostnum: Number) => {
+      this.totalMonthlyCost= totalCostnum;
+    } )
   }
 
 

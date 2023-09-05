@@ -1,16 +1,37 @@
+import { EventEmitter, Injectable } from "@angular/core";
 import { ChartItem } from "../model/ChartItem.model";
 import { Chart } from "chart.js";
 
-
+@Injectable()
 export class CategoryModifierService{
 
     public itemsList: ChartItem[] = [new ChartItem("car","red",300), new ChartItem("electricity","blue",100)];
     public chart: any;
 
+    public totalMonthlyCost: Number= 0;
+    
+    totalCostEvent: EventEmitter<Number> = new EventEmitter<Number>();
+    
+    constructor(){
+        this.calaculateMonthlyCost();
+    }
+
+    public calaculateMonthlyCost(){        
+        const numbersList: number[] = this.itemsList.map(item => item.monthlyCost);
+        // add up the entire list
+        this.totalMonthlyCost=numbersList.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        this.totalCostEvent.emit(this.totalMonthlyCost)
+        
+        
+    }
+
+
 
     public deleteItem(chartItemIndex: number){
         this.itemsList.splice(chartItemIndex,1)
         this.updateChart()
+        this.calaculateMonthlyCost()
+        
     }
 
     public updateItem(chartItemIndex: number, newCategoty: string, color: string, cost: number){
@@ -19,6 +40,7 @@ export class CategoryModifierService{
         this.itemsList[chartItemIndex].monthlyCost=cost;
 
         this.updateChart()
+        this.calaculateMonthlyCost()
     }
 
 
@@ -30,6 +52,8 @@ export class CategoryModifierService{
 
         console.log("items  "+this.itemsList);
         this.updateChart()
+        this.calaculateMonthlyCost()
+
     }
 
     private getItemsByType(property:string): any{
