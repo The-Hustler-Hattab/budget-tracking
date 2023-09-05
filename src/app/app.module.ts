@@ -9,6 +9,7 @@ import { CategoryModifierService } from './service/categoryModifier.service';
 import { AddChartItemComponent } from './component/pie-chart/add-chart-item/add-chart-item.component';
 import { FormsModule } from '@angular/forms';
 import { EditChartItemsComponent } from './component/edit-chart-items/edit-chart-items.component';
+import { ChartItemValidatorComponent } from './component/chart-item-validator/chart-item-validator.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { EditChartItemsComponent } from './component/edit-chart-items/edit-chart
     PieChartComponent,
     AddChartItemComponent,
     EditChartItemsComponent,
+    ChartItemValidatorComponent,
   ],
   imports: [
     BrowserModule,

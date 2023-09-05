@@ -36,6 +36,8 @@ export class AddChartItemComponent {
     this.isCategoryValid= true;
     
     console.log('Form Data:', this.formData);
+
+    
     if (this.formData.category.length<2) {
       this.isCategoryValid= false;
     }

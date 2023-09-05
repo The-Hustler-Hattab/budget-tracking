@@ -1,16 +1,5 @@
-<div *ngIf="!isCategoryValid" class="alert alert-danger alert-dismissible fade show" role="alert">
-    Category must be at least 2 charcters long.
-   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-       <span aria-hidden="true">&times;</span>
-   </button>
-</div>
-<div *ngIf="!isCostValid"  class="alert alert-danger alert-dismissible fade show" role="alert">
-   Cost must be at least 1 or greater.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 
+<app-chart-item-validator [isCategoryValid]="isCategoryValid" [isCostValid]="isCostValid"></app-chart-item-validator>
 
 <div class="container">
     <div class="row">

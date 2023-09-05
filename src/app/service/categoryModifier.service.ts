@@ -13,22 +13,14 @@ export class CategoryModifierService{
         this.updateChart()
     }
 
-    public changeCatgory(chartItemIndex: number, newCategoty: string){
+    public updateItem(chartItemIndex: number, newCategoty: string, color: string, cost: number){
         this.itemsList[chartItemIndex].category=newCategoty;
-        this.updateChart()
-    }
-
-    public changeColor(chartItemIndex: number, color: string){
         this.itemsList[chartItemIndex].color=color;
-        this.updateChart()
-
-    }
-
-    public changeCost(chartItemIndex: number, cost: number){
         this.itemsList[chartItemIndex].monthlyCost=cost;
-        this.updateChart()
 
+        this.updateChart()
     }
+
 
     public addNewCategory(chartItem: ChartItem){
         
@@ -84,7 +76,6 @@ export class CategoryModifierService{
       }
 
     private updateChart() {
-        console.log("[+] update chart");
         
         if (this.chart) {
           // Update chart data and labels
