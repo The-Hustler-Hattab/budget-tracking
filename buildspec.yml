@@ -19,7 +19,7 @@ phases:
   post_build:
     commands:
       - echo Build started on `date`
-      - ng build --prod
+      - ng build --configuration production
 artifacts:
   files:
     - '**/*'
