@@ -10,6 +10,16 @@ import { AddChartItemComponent } from './component/pie-chart/add-chart-item/add-
 import { FormsModule } from '@angular/forms';
 import { EditChartItemsComponent } from './component/edit-chart-items/edit-chart-items.component';
 import { ChartItemValidatorComponent } from './component/chart-item-validator/chart-item-validator.component';
+import { ChartComponent } from './component/chart/chart.component';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './component/home/home.component';
+import { AboutComponent } from './component/about/about.component';
+const routes: Routes = [
+  {path: "", component: ChartComponent},
+  {path:"home", component: HomeComponent},
+  {path:"about", component: AboutComponent},
+  
+]
 
 @NgModule({
   declarations: [
@@ -19,11 +29,15 @@ import { ChartItemValidatorComponent } from './component/chart-item-validator/ch
     AddChartItemComponent,
     EditChartItemsComponent,
     ChartItemValidatorComponent,
+    ChartComponent,
+    HomeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [CategoryModifierService,
   ],

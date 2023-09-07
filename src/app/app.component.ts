@@ -9,18 +9,11 @@ import { CategoryModifierService } from './service/categoryModifier.service';
 })
 export class AppComponent implements OnInit{
 
-  constructor(private categoryModifier :CategoryModifierService){}
   
-  public itemsList: ChartItem[]=[];
-  // public chartList: ChartItem[] = [new ChartItem("car","red",300), new ChartItem("electricity","blue",100)];
 
-
-  public categories: string[]=[];
 
   
   ngOnInit(): void {
-    this.itemsList= this.categoryModifier.itemsList;
-    // this.categories= this.categoryModifier.categories;
   }
 
 
