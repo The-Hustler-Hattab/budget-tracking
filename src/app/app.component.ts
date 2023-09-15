@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartItem } from './model/ChartItem.model';
 import { CategoryModifierService } from './service/categoryModifier.service';
+import { OAuthService,JwksValidationHandler  } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { CategoryModifierService } from './service/categoryModifier.service';
 })
 export class AppComponent implements OnInit{
 
-  
+ 
 
 
   

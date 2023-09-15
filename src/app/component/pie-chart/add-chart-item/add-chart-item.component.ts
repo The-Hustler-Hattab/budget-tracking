@@ -23,6 +23,7 @@ export class AddChartItemComponent {
   }
   
   formData: ChartItem = {
+    id:0,
     category: '',
     color: '',
     monthlyCost: 0,
@@ -55,6 +56,7 @@ export class AddChartItemComponent {
 
   clearForm(){
     this.formData = {
+      id: 0,
       category:'',
       color: '',
       monthlyCost: 0

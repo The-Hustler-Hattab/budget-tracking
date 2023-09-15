@@ -21,6 +21,13 @@ export class ChartComponent {
   
   ngOnInit(): void {
     this.itemsList= this.categoryModifier.itemsList;
+
+    this.categoryModifier.itemListEvent.subscribe((itemListEvent: ChartItem[]  ) => {
+      this.itemsList= itemListEvent;
+    console.log(this.itemsList);
+
+    } )
+    
     // this.categories= this.categoryModifier.categories;
   }
 

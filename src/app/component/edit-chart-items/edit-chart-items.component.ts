@@ -21,7 +21,7 @@ export class EditChartItemsComponent {
 
 
   @Input()
-  pieChartItem: ChartItem = new ChartItem("","",0);
+  pieChartItem: ChartItem = new ChartItem(0,"","",0);
 
   @Input() 
   id: number =0;

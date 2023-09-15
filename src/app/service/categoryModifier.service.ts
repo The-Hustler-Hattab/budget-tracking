@@ -1,19 +1,38 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { ChartItem } from "../model/ChartItem.model";
 import { Chart } from "chart.js";
+import { BudgetApiService } from "./budgetApiService.service";
 
 @Injectable()
 export class CategoryModifierService{
 
-    public itemsList: ChartItem[] = [new ChartItem("car","#ec2222",300), new ChartItem("electricity","#1100ff",100)];
+    public itemsList: ChartItem[] = [new ChartItem(0,"car","#ec2222",300), new ChartItem(0,"electricity","#1100ff",100)];
+    // public itemsList: ChartItem[] = [];
+
     public chart: any;
 
     public totalMonthlyCost: Number= 0;
     
     totalCostEvent: EventEmitter<Number> = new EventEmitter<Number>();
+    itemListEvent: EventEmitter< ChartItem[]> = new EventEmitter< ChartItem[]>();
     
-    constructor(){
-        this.calaculateMonthlyCost();
+    constructor(private apiService: BudgetApiService){
+
+        apiService.getAllBudgetRecords().subscribe((data: ChartItem[]) => {
+          this.itemsList=data;
+
+          console.log(data)
+          this.itemListEvent.emit(this.itemsList)
+
+          this.updateChart()
+          this.calaculateMonthlyCost();
+
+
+
+        })
+
+
+
     }
 
     public calaculateMonthlyCost(){        
@@ -46,7 +65,7 @@ export class CategoryModifierService{
 
     public addNewCategory(chartItem: ChartItem){
         
-        const newItem= new ChartItem(chartItem.category,chartItem.color,chartItem.monthlyCost)
+        const newItem= new ChartItem(0,chartItem.category,chartItem.color,chartItem.monthlyCost)
 
         this.itemsList.push(newItem);
 

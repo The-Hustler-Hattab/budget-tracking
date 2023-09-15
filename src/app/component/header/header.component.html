@@ -9,27 +9,37 @@
   
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item ">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/home" >Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/about">About Me</a>
+                    <a class="nav-link" routerLinkActive="active" routerLink="/about">About Me</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Project</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
                         <a class="dropdown-item" href="https://github.com/The-Hustler-Hattab/budget-tracking" target="_blank">Frontend Github Repo</a>
-                        <a class="dropdown-item" href="#"  target="_blank">Backend Github Repo</a>
+                        <a class="dropdown-item" href="https://github.com/The-Hustler-Hattab/BudgetSpringApi"  target="_blank">Backend Github Repo</a>
                     </div>
                 </li>
             </ul>
+            
+            
+
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Log out</a>
+                    <a class="nav-link active"
+                    *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="oktaAuth.signOut()" href="#">Log out</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Log in</a>
+                    <a class="nav-link" 
+                    *ngIf="!(authService.authState$ | async)?.isAuthenticated" (click)="oktaAuth.signInWithRedirect()" href="#">Log in</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" 
+                     (click)="print()" href="#">print</a>
+                </li>
+ 
                 
             </ul>
 

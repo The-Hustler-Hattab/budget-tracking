@@ -11,15 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { EditChartItemsComponent } from './component/edit-chart-items/edit-chart-items.component';
 import { ChartItemValidatorComponent } from './component/chart-item-validator/chart-item-validator.component';
 import { ChartComponent } from './component/chart/chart.component';
-import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './component/home/home.component';
 import { AboutComponent } from './component/about/about.component';
-const routes: Routes = [
-  {path: "", component: ChartComponent},
-  {path:"home", component: HomeComponent},
-  {path:"about", component: AboutComponent},
-  
-]
+import { HttpClientModule } from '@angular/common/http';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthRoutingModule } from './auth-routing.module';
+import { BudgetApiService } from './service/budgetApiService.service';
+
 
 @NgModule({
   declarations: [
@@ -37,9 +35,13 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    HttpClientModule,
+    OAuthModule.forRoot(),
+    AuthRoutingModule
   ],
-  providers: [CategoryModifierService,
+  providers: [
+    CategoryModifierService,
+    BudgetApiService
   ],
   bootstrap: [AppComponent]
 })
