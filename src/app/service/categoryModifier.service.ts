@@ -18,18 +18,24 @@ export class CategoryModifierService{
     
     constructor(private apiService: BudgetApiService){
 
-        apiService.getAllBudgetRecords().subscribe((data: ChartItem[]) => {
-          this.itemsList=data;
+      
+    try {
+          apiService.getAllBudgetRecords().subscribe((data: ChartItem[]) => {
+            this.itemsList=data;
+  
+            // console.log(data)
+            this.itemListEvent.emit(this.itemsList)
+  
+            this.updateChart()
+            this.calaculateMonthlyCost();
+  
+          })
+    } catch (error) {
+      console.error(error);  
 
-          console.log(data)
-          this.itemListEvent.emit(this.itemsList)
+    }
+    this.calaculateMonthlyCost();
 
-          this.updateChart()
-          this.calaculateMonthlyCost();
-
-
-
-        })
 
 
 
@@ -47,29 +53,72 @@ export class CategoryModifierService{
 
 
     public deleteItem(chartItemIndex: number){
-        this.itemsList.splice(chartItemIndex,1)
-        this.updateChart()
-        this.calaculateMonthlyCost()
+        
+      
+      try {
+      this.apiService.deleteBudgetRecord(this.itemsList[chartItemIndex])
+      .subscribe((data: {statusCode: number; statusMessage: string}) => {
+        
+        console.log(": "+data)
+        if (data.statusCode === 200) {
+          console.log("[+] record deleted successfuly")
+        }else{
+          console.log("error occured while deleting record\nstatus code: "+data.statusCode);
+          console.log("status message: "+data.statusMessage);
+        }
+      })
+        
+      } catch (error) {
+        console.error(error)
+        
+      }
+
+      this.itemsList.splice(chartItemIndex,1)  
+      this.updateChart()
+      this.calaculateMonthlyCost()
         
     }
 
     public updateItem(chartItemIndex: number, newCategoty: string, color: string, cost: number){
-        this.itemsList[chartItemIndex].category=newCategoty;
-        this.itemsList[chartItemIndex].color=color;
-        this.itemsList[chartItemIndex].monthlyCost=cost;
+      const updatedChartRecord= new ChartItem(
+        this.itemsList[chartItemIndex].id,this.itemsList[chartItemIndex].category,this.itemsList[chartItemIndex].color,
+        this.itemsList[chartItemIndex].monthlyCost);  
+      
+      try {
+        this.apiService.updateBudgetRecord(updatedChartRecord).subscribe((data: {statusCode: number; statusMessage: string}) => {
+          
+          console.log(": "+data)
+          if (data.statusCode === 200) {
+            console.log("[+] record updated successfuly")
+          }else{
+            console.error("error occured while updating record\nstatus code: "+data.statusCode);
+            console.error("status message: "+data.statusMessage);
+          }
+        })
+      } catch (error) {
+        console.error(error)
+  
+      }
 
-        this.updateChart()
-        this.calaculateMonthlyCost()
+      this.itemsList[chartItemIndex]= updatedChartRecord;
+      this.updateChart()
+      this.calaculateMonthlyCost()
     }
 
 
     public addNewCategory(chartItem: ChartItem){
         
-        const newItem= new ChartItem(0,chartItem.category,chartItem.color,chartItem.monthlyCost)
-
+        let newItem= new ChartItem(0,chartItem.category,chartItem.color,chartItem.monthlyCost)
+        
+        try {
+          this.apiService.saveBudgetRecord(newItem).subscribe((data: ChartItem) => {
+            newItem=data;
+          })
+        } catch (error) {
+          console.error(error)
+        }
         this.itemsList.push(newItem);
-
-        console.log("items  "+this.itemsList);
+        // console.log("items  "+this.itemsList);
         this.updateChart()
         this.calaculateMonthlyCost()
 
@@ -93,7 +142,7 @@ export class CategoryModifierService{
             
           }
         }
-        console.log(catgories)
+        // console.log(catgories)
         return catgories;
       }
 
