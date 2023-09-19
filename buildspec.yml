@@ -23,5 +23,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: 'dist/budget-tracking/*'
+  base-directory: 'dist*'
   # discard-paths: yes
