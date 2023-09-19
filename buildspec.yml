@@ -20,7 +20,8 @@ phases:
     commands:
       - echo Build started on `date`
       - ng build --configuration production
-      - mv budget-tracking/* ./
+      - ls -la
+      - mv ./budget-tracking/* ./
 artifacts:
   files:
     - '**/*'
