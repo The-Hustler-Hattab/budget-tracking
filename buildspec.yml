@@ -21,9 +21,9 @@ phases:
       - echo Build started on `date`
       - ng build --configuration production
       - ls -la
-      - mv ./budget-tracking/* ./
+      - mv ./dist/budget-tracking/* ./
 artifacts:
   files:
-    - '**/*'
+    - '*'
   base-directory: 'dist*'
   # discard-paths: yes
