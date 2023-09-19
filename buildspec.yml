@@ -21,7 +21,7 @@ phases:
       - echo Build started on `date`
       - ng build --configuration production
       - ls -la
-      - mv ./dist/budget-tracking/* ./
+      - mv ./dist/budget-tracking/* ./dist
 artifacts:
   files:
     - '*'
