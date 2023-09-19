@@ -22,6 +22,6 @@ phases:
       - ng build --configuration production
 artifacts:
   files:
-    - '**/*'
-  base-directory: 'dist*'
+    - '**/**'
+  base-directory: 'dist/budget-tracking**'
   # discard-paths: yes
