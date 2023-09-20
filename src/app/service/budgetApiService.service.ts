@@ -24,36 +24,45 @@ export class BudgetApiService {
     headers: HttpHeaders = new HttpHeaders({
         'Content-Type': 'application/json',
       });
+      private apiUrl = environment.rooturl;
     
     
       getAllBudgetRecords(): Observable<ChartItem[]> {
+
+        const url = `${this.apiUrl}`;
+
+
         const headers = this.headers;
             return this.http.get<{ statusCode: number; statusMessage: string; budgetModels: ChartItem[] }>
-            ( environment.rooturl+ AppConstants.BUDGET_API+ AppConstants.GET_ALL_BUDGET_RECORDS,
+            ( url+ AppConstants.BUDGET_API+ AppConstants.GET_ALL_BUDGET_RECORDS,
             { headers } ).pipe(map(response => response.budgetModels));
 
       }
 
       saveBudgetRecord(newBudgetRecord: ChartItem) : Observable<ChartItem>{
         const headers = this.headers;
+        const url = `${this.apiUrl}`;
+
 
         return this.http.post< {statusCode: number; statusMessage: string; budgetModel: ChartItem}>
-        (environment.rooturl+ AppConstants.BUDGET_API+ AppConstants.POST_SAVE_BUDGET_RECORD
+        (url+ AppConstants.BUDGET_API+ AppConstants.POST_SAVE_BUDGET_RECORD
             , newBudgetRecord, { headers }).pipe(map(response => response.budgetModel));
       }
 
       deleteBudgetRecord(budgetRecordToDelete: ChartItem) : Observable<{statusCode: number; statusMessage: string}>{
+        const url = `${this.apiUrl}`;
         const headers = this.headers;
         return this.http.post< {statusCode: number; statusMessage: string}>
-        (environment.rooturl+ AppConstants.BUDGET_API+ AppConstants.POST_DELETE_BUDGET_RECORD
+        (url+ AppConstants.BUDGET_API+ AppConstants.POST_DELETE_BUDGET_RECORD
             , budgetRecordToDelete, { headers } );
       }
 
       
       updateBudgetRecord(updatedRecord: ChartItem) : Observable<{statusCode: number; statusMessage: string}>{
+        const url = `${this.apiUrl}`;
         const headers = this.headers;
         return this.http.put< {statusCode: number; statusMessage: string;}>
-            (environment.rooturl+ AppConstants.BUDGET_API+ AppConstants.PUT_BUDGET_RECORD
+            (url+ AppConstants.BUDGET_API+ AppConstants.PUT_BUDGET_RECORD
             , updatedRecord, { headers });
       }
 
