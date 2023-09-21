@@ -35,6 +35,11 @@
                     <a class="nav-link" 
                     *ngIf="!(authService.authState$ | async)?.isAuthenticated" (click)="oktaAuth.signInWithRedirect()" href="#">Log in</a>
                 </li>
+<!-- 
+                <li class="nav-item active">
+                    <a class="nav-link" 
+                     (click)="print()" href="#">print</a>
+                </li> -->
 
                 
             </ul>

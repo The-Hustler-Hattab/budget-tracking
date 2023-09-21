@@ -18,6 +18,12 @@ export class HeaderComponent {
   private http: HttpClient, private apiService: BudgetApiService) {
   }
 
+  
+  print(){
+    let token = this.oktaAuth.getAccessToken()
+    console.log(token)
+  }
+
 
 
 

@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { map } from "rxjs";
 import { Observable } from "rxjs/internal/Observable";
 import { environment } from "src/environments/environment";
 import { ChartItem } from "../model/ChartItem.model";
+import { OKTA_AUTH } from "@okta/okta-angular";
+import OktaAuth from "@okta/okta-auth-js";
 
 export const  AppConstants = {
     BUDGET_API: "/v1/api/budget",
@@ -19,10 +21,11 @@ export const  AppConstants = {
 @Injectable()
 export class BudgetApiService {
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient,@Inject(OKTA_AUTH) public oktaAuth: OktaAuth) {}
 
     headers: HttpHeaders = new HttpHeaders({
         'Content-Type': 'application/json',
+        'Authorization': 'bearer '+this.oktaAuth.getAccessToken()
       });
       private apiUrl = environment.rooturl;
     
