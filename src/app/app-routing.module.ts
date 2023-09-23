@@ -4,6 +4,7 @@ import { ChartComponent } from './component/chart/chart.component';
 import { HomeComponent } from './component/home/home.component';
 import { AboutComponent } from './component/about/about.component';
 import { OktaCallbackComponent } from '@okta/okta-angular';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: "", component: ChartComponent},
@@ -12,7 +13,9 @@ const routes: Routes = [
   {
     path: 'callback',
     component: OktaCallbackComponent
-  }
+  },
+  { path: 'page-not-found', component: PageNotFoundComponent},
+  { path: '**', redirectTo:'page-not-found'},
 
 ];
 
