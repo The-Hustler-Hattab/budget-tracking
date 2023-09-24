@@ -27,7 +27,9 @@ export class CategoryModifierService{
 
 
     public async getAllChartItemsFromServer(): Promise<ChartItem[]>{
-      if(await this.oktaAuth.isAuthenticated()){
+      console.log("log in status "+(await this.oktaAuth.isAuthenticated()).valueOf());
+      
+      if(await this.oktaAuth.isAuthenticated().valueOf()){
         try {
           this.apiService.getAllBudgetRecords().subscribe((data: ChartItem[]) => {
             this.itemsList=data;
@@ -43,11 +45,18 @@ export class CategoryModifierService{
     } catch (error) {
       console.error("error"+error);  
       this.itemsList= this.loggedOffItems.slice();
+      this.itemListEvent.emit(this.itemsList)
+      // this.updateChart()
+      // this.calaculateMonthlyCost();
       return this.itemsList
   
     }
     }
+
       this.itemsList=this.loggedOffItems.slice();
+      this.itemListEvent.emit(this.itemsList)
+      // this.updateChart()
+      // this.calaculateMonthlyCost();
       return this.loggedOffItems.slice();
 
 

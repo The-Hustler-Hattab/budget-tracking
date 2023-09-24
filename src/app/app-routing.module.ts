@@ -8,8 +8,10 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
 import { CategoryModifierService } from './service/categoryModifier.service';
 
 const routes: Routes = [
-  {path: "" , component: ChartComponent },
-  {path:"home", component: HomeComponent},
+  {path: "budget" , component: ChartComponent },
+  {path:"", component: HomeComponent},
+  {path:"home", redirectTo: ""},
+
   {path:"about", component: AboutComponent},
   {path: 'callback', component: OktaCallbackComponent},
   { path: 'page-not-found', component: PageNotFoundComponent},
