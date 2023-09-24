@@ -9,8 +9,8 @@ import { CategoryModifierService } from './service/categoryModifier.service';
 
 const routes: Routes = [
   {path: "budget" , component: ChartComponent },
-  {path:"", component: HomeComponent},
-  {path:"home", redirectTo: ""},
+  {path:"home", component: HomeComponent},
+  {path:"",redirectTo: "home", pathMatch: 'full'},
 
   {path:"about", component: AboutComponent},
   {path: 'callback', component: OktaCallbackComponent},
