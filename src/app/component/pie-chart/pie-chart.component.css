@@ -1,0 +1,10 @@
+
+.warning{
+    color: white;
+    background-color: rgb(220, 87, 109);
+}
+
+.fade-container {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }

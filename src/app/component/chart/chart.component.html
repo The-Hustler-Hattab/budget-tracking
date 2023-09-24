@@ -1,0 +1,9 @@
+<app-pie-chart ></app-pie-chart>
+
+
+<app-edit-chart-items
+*ngFor="let item of itemsList; let i = index"
+[pieChartItem]="item"
+[id]="i"
+
+></app-edit-chart-items>
