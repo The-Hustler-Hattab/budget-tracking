@@ -1,19 +1,17 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChartComponent } from './component/chart/chart.component';
 import { HomeComponent } from './component/home/home.component';
 import { AboutComponent } from './component/about/about.component';
 import { OktaCallbackComponent } from '@okta/okta-angular';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { CategoryModifierService } from './service/categoryModifier.service';
 
 const routes: Routes = [
-  {path: "", component: ChartComponent},
+  {path: "" , component: ChartComponent },
   {path:"home", component: HomeComponent},
   {path:"about", component: AboutComponent},
-  {
-    path: 'callback',
-    component: OktaCallbackComponent
-  },
+  {path: 'callback', component: OktaCallbackComponent},
   { path: 'page-not-found', component: PageNotFoundComponent},
   { path: '**', redirectTo:'page-not-found'},
 

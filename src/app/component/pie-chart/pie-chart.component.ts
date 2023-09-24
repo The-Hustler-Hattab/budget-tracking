@@ -20,9 +20,11 @@ export class PieChartComponent{
 
     ){}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     console.log("+"+this.itemsList);
-    this.itemsList= this.categoryModifier.itemsList
+    this.itemsList= await this.categoryModifier.getAllChartItemsFromServer()
+    console.log("+"+this.itemsList);
+
     this.chart = this.categoryModifier.chart;
     this.categoryModifier.createChart()
 

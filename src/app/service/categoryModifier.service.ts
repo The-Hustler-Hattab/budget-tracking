@@ -1,12 +1,15 @@
-import { EventEmitter, Injectable } from "@angular/core";
+import { EventEmitter, Inject, Injectable } from "@angular/core";
 import { ChartItem } from "../model/ChartItem.model";
 import { Chart } from "chart.js";
 import { BudgetApiService } from "./budgetApiService.service";
+import OktaAuth from "@okta/okta-auth-js";
+import { OKTA_AUTH } from "@okta/okta-angular";
 
 @Injectable()
 export class CategoryModifierService{
+  public loggedOffItems: ChartItem[] = [new ChartItem(0,"car","#ec2222",300), new ChartItem(0,"electricity","#1100ff",100)];
 
-    public itemsList: ChartItem[] = [new ChartItem(0,"car","#ec2222",300), new ChartItem(0,"electricity","#1100ff",100)];
+    public itemsList: ChartItem[] = [];
     // public itemsList: ChartItem[] = [];
 
     public chart: any;
@@ -16,11 +19,17 @@ export class CategoryModifierService{
     totalCostEvent: EventEmitter<Number> = new EventEmitter<Number>();
     itemListEvent: EventEmitter< ChartItem[]> = new EventEmitter< ChartItem[]>();
     
-    constructor(private apiService: BudgetApiService){
+    constructor(private apiService: BudgetApiService, @Inject(OKTA_AUTH) public oktaAuth: OktaAuth ){
+      this.getAllChartItemsFromServer();
+      this.calaculateMonthlyCost();
 
-      
-    try {
-          apiService.getAllBudgetRecords().subscribe((data: ChartItem[]) => {
+    }
+
+
+    public async getAllChartItemsFromServer(): Promise<ChartItem[]>{
+      if(await this.oktaAuth.isAuthenticated()){
+        try {
+          this.apiService.getAllBudgetRecords().subscribe((data: ChartItem[]) => {
             this.itemsList=data;
   
             // console.log(data)
@@ -28,18 +37,22 @@ export class CategoryModifierService{
   
             this.updateChart()
             this.calaculateMonthlyCost();
+            return this.itemsList
   
           })
     } catch (error) {
-      console.error(error);  
-
+      console.error("error"+error);  
+      this.itemsList= this.loggedOffItems.slice();
+      return this.itemsList
+  
     }
-    this.calaculateMonthlyCost();
-
-
-
-
     }
+      this.itemsList=this.loggedOffItems.slice();
+      return this.loggedOffItems.slice();
+
+
+
+  }
 
     public calaculateMonthlyCost(){        
         const numbersList: number[] = this.itemsList.map(item => item.monthlyCost);
@@ -53,8 +66,6 @@ export class CategoryModifierService{
 
 
     public deleteItem(chartItemIndex: number){
-        
-      
       try {
       this.apiService.deleteBudgetRecord(this.itemsList[chartItemIndex])
       .subscribe((data: {statusCode: number; statusMessage: string}) => {
@@ -167,7 +178,7 @@ export class CategoryModifierService{
         });
       }
 
-    private updateChart() {
+    public updateChart() {
         
         if (this.chart) {
           // Update chart data and labels

@@ -18,6 +18,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { AuthRoutingModule } from './auth-routing.module';
 import { BudgetApiService } from './service/budgetApiService.service';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { TokenService } from './service/token.service';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
   ],
   providers: [
     CategoryModifierService,
-    BudgetApiService
+    BudgetApiService,
+    TokenService
   ],
   bootstrap: [AppComponent]
 })
