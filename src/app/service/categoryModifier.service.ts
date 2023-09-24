@@ -4,6 +4,7 @@ import { Chart } from "chart.js";
 import { BudgetApiService } from "./budgetApiService.service";
 import OktaAuth from "@okta/okta-auth-js";
 import { OKTA_AUTH } from "@okta/okta-angular";
+import { getCookie } from "typescript-cookie";
 
 @Injectable()
 export class CategoryModifierService{
@@ -22,6 +23,7 @@ export class CategoryModifierService{
     constructor(private apiService: BudgetApiService, @Inject(OKTA_AUTH) public oktaAuth: OktaAuth ){
       this.getAllChartItemsFromServer();
       this.calaculateMonthlyCost();
+      this.updateChart()
 
     }
 
@@ -31,7 +33,7 @@ export class CategoryModifierService{
       
       if(await this.oktaAuth.isAuthenticated().valueOf()){
         try {
-          this.apiService.getAllBudgetRecords().subscribe((data: ChartItem[]) => {
+          this.apiService.getAllBudgetRecords().subscribe((data: ChartItem[]) => {            
             this.itemsList=data;
   
             // console.log(data)
@@ -43,20 +45,17 @@ export class CategoryModifierService{
   
           })
     } catch (error) {
-      console.error("error"+error);  
+      console.log("error: "+error);  
       this.itemsList= this.loggedOffItems.slice();
       this.itemListEvent.emit(this.itemsList)
-      // this.updateChart()
-      // this.calaculateMonthlyCost();
       return this.itemsList
   
-    }
+      }
     }
 
       this.itemsList=this.loggedOffItems.slice();
       this.itemListEvent.emit(this.itemsList)
-      // this.updateChart()
-      // this.calaculateMonthlyCost();
+      this.calaculateMonthlyCost();
       return this.loggedOffItems.slice();
 
 
