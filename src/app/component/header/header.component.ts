@@ -41,13 +41,7 @@ export class HeaderComponent {
     this.oktaAuth.signOut();
     console.log("logged out");
 
-
-
-    
     // this.token.emit("")
-
-
-
   }
 
 
